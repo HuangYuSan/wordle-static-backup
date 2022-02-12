@@ -17,7 +17,7 @@
   --color-cells: white;
   --border-color-cells: black;
   --color-keys: white;
-  --border-color-keys: black;
+  --border-color-keys: grey;
   --color-stats-key: black;
   --color-stats-val: darkred;
 
@@ -32,7 +32,7 @@
   --color-cells: white;
   --border-color-cells: white;
   --color-keys: white;
-  --border-color-keys: white;
+  --border-color-keys: #444;
   --color-stats-key: white;
   --color-stats-val: red;
 
@@ -403,7 +403,7 @@ body {
     flex-grow: 1;
     border-radius: 3px;
     background-color: var(--bg-color);
-    border: 1px solid grey;
+    border: 1px solid var(--border-color-keys);
     justify-content: center;
     display: flex;
     align-items: center;
@@ -418,7 +418,8 @@ body {
 #keyboard .key:is(.false, .moved, .correct) {
     transition: background-color 280ms, border-color 280ms;
     color: var(--color-keys);
-    border-color: var(--border-color-keys);
+    /* border-color: var(--border-color-keys); */
+    border: 0;
 }
 
 #keyboard .key.false {
