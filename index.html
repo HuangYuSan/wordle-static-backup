@@ -1,129 +1,215 @@
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
 
-    <title>Wordle auf Deutsch - Das Original</title>
-    <meta name="description" content="Errate das versteckte Wort mit 6 Versuchen. Jeden Tag wartet ein neues Rätsel auf dich. Kostenlose Web-App.">
+        <title>Wordle auf Deutsch - Das echte Browserspiel</title>
+        <meta name="description" content="Errate das versteckte Wort mit 6 Versuchen. Jeden Tag wartet ein neues Rätsel auf dich.">
 
-    <!-- FB Meta Tags -->
-    <meta property="og:url" content="https://wordle.at">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Wordle auf Deutsch - Das Original">
-    <meta property="og:description" content="Errate das versteckte Wort mit 6 Versuchen. Jeden Tag wartet ein neues Rätsel auf dich. Kostenlose Web-App.">
-    <meta property="og:image" content="images/wordle_logo_192x192.png">
+        <!-- FB Meta Tags -->
+        <meta property="og:url" content="https://wordle.at">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Wordle auf Deutsch">
+        <meta property="og:description" content="Errate das versteckte Wort mit 6 Versuchen. Jeden Tag wartet ein neues Rätsel auf dich.">
+        <meta property="og:image" content="images/wordle_logo_192x192.png">
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="puzzlephil.com">
 
-    <meta name="theme-color" content="#6aaa64" />
-    <link rel="manifest" href="manifest.json" />
-    <link href="images/wordle_logo_32x32.png" rel="icon shortcut" sizes="3232" />
-    <link href="images/wordle_logo_192x192.png" rel="apple-touch-icon" />
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
 
-    <style>
-      /* Global Styles & Colors */
-      :root {
-        --green: #6aaa64;
-        --darkendGreen: #538d4e;
-        --yellow: #c9b458;
-        --darkendYellow: #b59f3b;
-        --lightGray: #d8d8d8;
-        --gray: #86888a;
-        --darkGray: #939598;
-        --white: #fff;
-        --black: #212121;
-        /* Colorblind colors */
-        --orange: #f5793a;
-        --blue: #85c0f9;
-        font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 16px;
-        --header-height: 70px; /* phil 50px */
-        --keyboard-height: 200px;
-        --game-max-width: 500px;
-      }
-      /* Light theme colors */
-      :root {
-        --color-tone-1: #1a1a1b;
-        --color-tone-2: #787c7e;
-        --color-tone-3: #878a8c;
-        --color-tone-4: #d3d6da;
-        --color-tone-5: #edeff1;
-        --color-tone-6: #f6f7f8;
-        --color-tone-7: #ffffff;
-        --opacity-50: rgba(255, 255, 255, 0.5);
-      }
-      /* Dark Theme Colors */
-      .nightmode {
-        --color-tone-1: #d7dadc;
-        --color-tone-2: #818384;
-        --color-tone-3: #565758;
-        --color-tone-4: #3a3a3c;
-        --color-tone-5: #272729;
-        --color-tone-6: #1a1a1b;
-        --color-tone-7: #121213;
-        --opacity-50: rgba(0, 0, 0, 0.5);
-      }
-      /* Constant colors and colors derived from theme */
-      :root,
-      .nightmode {
-        --color-background: var(--color-tone-7);
-      }
-      :root {
-        --color-present: var(--yellow);
-        --color-correct: var(--green);
-        --color-absent: var(--color-tone-2);
-        --tile-text-color: var(--color-tone-7);
-        --key-text-color: var(--color-tone-1);
-        --key-evaluated-text-color: var(--color-tone-7);
-        --key-bg: var(--color-tone-4);
-        --key-bg-present: var(--color-present);
-        --key-bg-correct: var(--color-correct);
-        --key-bg-absent: var(--color-absent);
-        --modal-content-bg: var(--color-tone-7);
-      }
-      .nightmode {
-        --color-present: var(--darkendYellow);
-        --color-correct: var(--darkendGreen);
-        --color-absent: var(--color-tone-4);
-        --tile-text-color: var(--color-tone-1);
-        --key-text-color: var(--color-tone-1);
-        --key-evaluated-text-color: var(--color-tone-1);
-        --key-bg: var(--color-tone-2);
-        --key-bg-present: var(--color-present);
-        --key-bg-correct: var(--color-correct);
-        --key-bg-absent: var(--color-absent);
-        --modal-content-bg: var(--color-tone-7);
-      }
-      .colorblind {
-        --color-correct: var(--orange);
-        --color-present: var(--blue);
-        --tile-text-color: var(--white);
-        --key-bg-present: var(--color-present);
-        --key-bg-correct: var(--color-correct);
-        --key-bg-absent: var(--color-absent);
-      }
-      html {
-        height: 100%;
-      }
-      body {
-        height: 100%;
-        background-color: var(--color-background);
-        margin: 0;
-        padding: 0;
-        overflow-y: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      (function () {
-        window.wordle = window.wordle || {};
-        window.wordle.hash = 'c1506a22';
-      })();
-    </script>
-    <script src="wordle.min.js?v1.6" charset="utf-8"></script>
-    <game-app></game-app>
-  </body>
+        <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="img/favicon.ico" />
+
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="main.css" />
+        <script src="word-list.js"></script> <!-- WICHTIG: muss VOR main.min.js eingebunden sein -->
+        <script src="main.min.js?1.7"></script>
+    </head>
+    <body>
+        <div id="game">
+            <div id="titlebar">
+                <button id="dark-mode"></button>
+                <button id="high-contrast"></button>
+                <div id="title"></div>
+                <button id="openStats"></button>
+                <button id="openInfo"></button>
+                <!-- <button id="openSettings">Einstellungen</button> -->
+            </div>
+
+            <div id="board"></div>
+            <div id="lower-area">
+                <div id="keyboard"></div>
+                <div id="results-wrapper">
+                    <div id="results">
+                        <div id="solution"></div>
+                        <div id="streak">Streak</div>
+                        <div id="actions">
+                            <!-- <button id="openStatsAction">
+                                <img src="img/stats.svg" />
+                            </button> -->
+                            <button id="share-action">
+                                <span>Teilen</span>
+                                <img src="img/share.svg" />
+                            </button>
+                        </div>
+                        <div id="countdown">Countdown</div>
+                        <div id="next-game">
+                            <button></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="end-message-container">
+            <div id="end-message" class="invisible"></div>
+        </div>
+
+        <div id="popup-background" class="invisible">&nbsp;</div>
+
+        <div id="info" class="overlay invisible">
+            <h2>Info</h2>
+            <button id="close-info"></button>
+
+            <div class="rules">
+                <p>
+                    Errate das <strong class="app-name"></strong> in 6 Versuchen!
+                </p>
+                <p>
+                    Das Ziel des Spiels ist, ein Wort mit 5 Buchstaben zu erraten.
+                    Die Umlaute Ä, Ö und Ü wurden durch AE, OE bzw. UE ersetzt, und ẞ durch SS.
+                    Gib ein Wort ein und drück auf das Häkchen rechts unten, um es zu überprüfen.
+                </p>
+                <p>
+                    Nach jedem Versuch erhältst du einen Hinweis dazu, wie viele Buchstaben du richtig erraten hast.
+                </p>
+                <p>
+                    Wenn du den schwierigen Modus aktivierst, kannst du nur Wörter eingeben, die zu allen Hinweisen
+                    passen, die du bereits erhalten hast:
+                </p>
+
+                <div id="hard-mode-setting">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Schwieriger Modus</span>
+                </div>
+            </div>
+            <div class="beispiele">
+                <p>
+                    <strong>Beispiel:</strong>
+                </p>
+                <p>
+                  Das gesuchte Wort ist LEBEN. Das eingegebene Wort ist GERNE.
+                </p>
+                <div class="zeile">
+                    <div class="cell solution">L</div>
+                    <div class="cell solution">E</div>
+                    <div class="cell solution">B</div>
+                    <div class="cell solution">E</div>
+                    <div class="cell solution">N</div>
+                </div>
+                <div class="zeile">
+                    <div class="cell false">G</div>
+                    <div class="cell correct">E</div>
+                    <div class="cell false">R</div>
+                    <div class="cell moved">N</div>
+                    <div class="cell moved">E</div>
+                </div>
+                <p>
+                    Diese <strong>Farbcodes</strong> helfen dir beim Finden des richtigen Wortes:
+                </p>
+                <div style="text-align: left;">
+                    <p><span class="letter correct">&nbsp;E&nbsp;</span>: Das <strong>E</strong> ist an der richtigen Stelle.</p>
+                    <p><span class="letter moved">&nbsp;N&nbsp;</span>: Das <strong>N</strong> ist im Lösungswort enthalten, aber an einer anderen Stelle. (Das gilt auch für das zweite <strong>E</strong>.)</p>
+                    <p><span class="letter false">&nbsp;G&nbsp;</span>, <span class="letter false">&nbsp;R&nbsp;</span>: <strong>G</strong> und <strong>R</strong> kommen im Lösungswort gar nicht vor.</p>
+                </div>
+
+                <p><strong><center>
+                    Jeden Tag wartet ein neues <span class="app-name"></span> auf dich!
+                <center></strong></p>
+            </div>
+
+            <hr />
+
+            <div class="small-print">
+                Software © <a target="_blank" href="https://puzzlephil.com/">puzzlephil</a>. Alle Rechte vorbehalten.
+
+                <br />
+
+                Nach dem beliebten Spiel
+                „<a target="_blank" href="https://powerlanguage.co.uk/wordle/">Wordle</a>“
+                von
+                <a target="_blank" href="https://powerlanguage.co.uk/">Josh Wardle</a>.
+
+                <br />
+
+                Wir bitten um Feedback per
+                <a target="_blank" href="mailto:wordle.at@gmail.com?Subject=Wordle">Email</a>
+                oder auf
+                <a target="_blank" href="https://twitter.com/intent/tweet?screen_name=at_wordle">Twitter</a>.
+
+                <br />
+
+                <a target="_blank" href="datenschutzbestimmungen">Datenschutzbestimmungen</a>
+            </div>
+        </div>
+
+        <div id="stats" class="overlay invisible">
+            <h2>Statistik</h2>
+            <button id="close-stats"></button>
+            <div class="top">
+                <div class="col">
+                    <div class="key">
+                    gespielt
+                    </div>
+                    <div id="gespielt" class="val"></div>
+                </div>
+                <div class="col">
+                    <div class="key">
+                    gelöst
+                    </div>
+                    <div id="geschafft" class="val"></div>
+                </div>
+                <div class="col">
+                    <div class="key">
+                    akt.<br />Streak
+                    </div>
+                    <div id="cur-streak" class="val"></div>
+                </div>
+                <div class="col">
+                    <div class="key">
+                    max.<br />Streak
+                    </div>
+                    <div id="max-streak" class="val"></div>
+                </div>
+            </div>
+            <h2>Nach Versuchen</h2>
+            <div class="mittelwert">
+            </div>
+            <div class="verteilung">
+            </div>
+        </div>
+
+        <div id="settings" class="overlay invisible">
+            Einstellungen
+            <button id="closeSettings">Schließen</button>
+        </div>
+    </body>
 </html>
