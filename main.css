@@ -154,6 +154,7 @@ body {
     grid-column-gap: var(--cell-gap);
     grid-template-columns: repeat(5, 1fr);
     margin: 10px;
+    max-height: 600px; /* TODO Hack: width passt sich an */
 }
 
 #board .cell {
