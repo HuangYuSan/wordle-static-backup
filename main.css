@@ -21,9 +21,9 @@
   --color-stats-key: black;
   --color-stats-val: darkred;
 
-  --color-false: #888;
-  --color-moved: #db3;
-  --color-correct: #4a4;
+  --color-false: #666;
+  --color-moved: #c8b359; /* c9b458 */
+  --color-correct: #67a760; /* 6aaa64 */
 }
 
 :root.dark-mode {
@@ -37,7 +37,7 @@
   --color-stats-val: red;
 
   --color-false: #555;
-  --color-moved: #fd4;
+  --color-moved: #c8b356;
   --color-correct: #5b5;
 }
 
