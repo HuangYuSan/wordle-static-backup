@@ -1,15 +1,13 @@
 <!doctype html>
-<html lang="de" xml:lang="de" xmlns= "http://www.w3.org/1999/xhtml">
+<html lang="de" xml:lang="de" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
-
-        
         <meta charset="UTF-8">
-        <meta name="google" content="notranslate">
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
         <meta http-equiv="Content-Language" content="de">
+        <meta name="google" content="notranslate">
 
-        <title>Wordle auf Deutsch - Das echte Browserspiel</title>
+        <title>Wordle auf Deutsch – Das echte Browserspiel</title>
         <meta name="description" content="Errate das versteckte Wort mit 6 Versuchen. Jeden Tag wartet ein neues Rätsel auf dich.">
 
         <!-- FB Meta Tags -->
@@ -41,9 +39,9 @@
         <link rel="shortcut icon" href="img/favicon.ico" />
 
         <link rel="manifest" href="manifest.json" />
-        <link rel="stylesheet" href="main.css?1.15" />
+        <link rel="stylesheet" href="main.css?1.16" />
         <script src="word-list.js"></script> <!-- WICHTIG: muss VOR main.min.js eingebunden sein -->
-        <script src="main.min.js?1.15"></script>
+        <script src="main.min.js?1.16"></script>
     </head>
     <body>
         <div id="game">
@@ -56,7 +54,9 @@
                 <!-- <button id="openSettings">Einstellungen</button> -->
             </div>
 
-            <div id="board"></div>
+            <div id="board-container">
+                <div id="board"></div>
+            </div>
             <div id="lower-area">
                 <div id="keyboard"></div>
                 <div id="results-wrapper">
@@ -147,7 +147,7 @@
                 </div>
 
                 <p><strong><center>
-                    Jeden Tag wartet ein neues <span class="app-name"></span> auf dich!
+                    Jeden Tag wartet ein neues Rätsel auf dich!
                 <center></strong></p>
             </div>
 

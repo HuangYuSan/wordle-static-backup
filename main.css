@@ -21,7 +21,7 @@
   --color-stats-key: black;
   --color-stats-val: darkred;
 
-  --color-false: #666;
+  --color-false: #888;
   --color-moved: #c8b359; /* c9b458 */
   --color-correct: #67a760; /* 6aaa64 */
 }
@@ -92,6 +92,7 @@ body {
     position: absolute;
     color: var(--txt-color);
     width: 100%;
+    max-width: 600px;
     height: 100%;
     top: 50%;
     left: 50%;
@@ -99,14 +100,14 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 10px;
+    gap: 20px;
 }
 
 #titlebar {
-    box-sizing: border-box;
-    height: 60px;
+    height: 40px;
     width: 100%;
     display: flex;
-    padding: 10px;
 }
 
 #title {
@@ -116,6 +117,12 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 32px;
+}
+
+@media (max-width: 320px) {
+    #title {
+        font-size: 20px;
+    }
 }
 
 #titlebar button {
@@ -147,14 +154,20 @@ body {
     background-image: url(img/eye.svg);
 }
 
-#board {
+#board-container {
     flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#board {
     display: grid;
     grid-row-gap: var(--cell-gap);
     grid-column-gap: var(--cell-gap);
     grid-template-columns: repeat(5, 1fr);
-    margin: 10px;
-    max-height: 600px; /* TODO Hack: width passt sich an */
 }
 
 #board .cell {
@@ -165,7 +178,6 @@ body {
     justify-content: center;
     background-position: 100% 0%;
     font-weight: bold;
-    font-size: 2.0em;
     transition: transform 200ms, box-shadow 200ms;
     background-color: var(--bg-color);
 }
@@ -173,16 +185,6 @@ body {
 #board .cell.active {
     box-shadow: 0 0 7px 1px grey;
 }
-
-/* #board .cell:nth-child(5n+1) {
-    border-radius: 8px 0 0 8px;
-    border-left-width: 2px;
-}
-
-#board .cell:nth-child(5n+5) {
-    border-radius: 0 8px 8px 0;
-    border-right-width: 2px;
-} */
 
 #board .cell:is(.false, .moved, .correct) {
     background-size: 220% 100%;
@@ -268,6 +270,12 @@ body {
     width: 100%;
     height: var(--keyboard-height);
     position: relative;
+}
+
+@media (max-height: 500px) {
+    #lower-area {
+        max-height: 20%;
+    }
 }
 
 #results-wrapper {
@@ -376,7 +384,6 @@ body {
     width: 100%;
     max-width: var(--keybord-max-width);
     height: 100%;
-    padding: 10px 0;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -395,11 +402,6 @@ body {
     gap: 4px;
 }
 
-/* #keyboard .middle-key-row {
-  width: 94%;
-  margin-left: 3%;
-} */
-
 #keyboard .key {
     flex-grow: 1;
     border-radius: 3px;
@@ -408,8 +410,19 @@ body {
     justify-content: center;
     display: flex;
     align-items: center;
-    /* font-weight: bold; */
     font-size: 20px;
+}
+
+@media (max-width: 350px) {
+    #keyboard .key {
+        font-size: 10px;
+    }
+} 
+
+@media (max-height: 500px) {
+    #keyboard .key {
+        font-size: 15px;
+    }
 }
 
 #keyboard .key:active{
